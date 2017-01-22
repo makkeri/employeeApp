@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */; };
+		411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */; };
 		41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */; };
-		41ABE9E21E33BEF1000972B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABE9E11E33BEF1000972B1 /* ViewController.swift */; };
 		41ABE9E51E33BEF1000972B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E31E33BEF1000972B1 /* Main.storyboard */; };
 		41ABE9E71E33BEF1000972B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E61E33BEF1000972B1 /* Assets.xcassets */; };
 		41ABE9EA1E33BEF1000972B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E81E33BEF1000972B1 /* LaunchScreen.storyboard */; };
 		41ABE9F51E33BEF1000972B1 /* EmployeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABE9F41E33BEF1000972B1 /* EmployeeAppTests.swift */; };
+		41ABEA011E33C5B8000972B1 /* EmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABEA001E33C5B8000972B1 /* EmployeesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
+		411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeTableCell.swift; sourceTree = "<group>"; };
 		41ABE9DC1E33BEF1000972B1 /* EmployeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		41ABE9E11E33BEF1000972B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		41ABE9E41E33BEF1000972B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41ABE9E61E33BEF1000972B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41ABE9E91E33BEF1000972B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		41ABE9F01E33BEF1000972B1 /* EmployeeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmployeeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ABE9F41E33BEF1000972B1 /* EmployeeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeAppTests.swift; sourceTree = "<group>"; };
 		41ABE9F61E33BEF1000972B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41ABEA001E33C5B8000972B1 /* EmployeesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +81,14 @@
 		41ABE9DE1E33BEF1000972B1 /* EmployeeApp */ = {
 			isa = PBXGroup;
 			children = (
+				41ABE9FF1E33C582000972B1 /* ViewControllers */,
 				41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */,
-				41ABE9E11E33BEF1000972B1 /* ViewController.swift */,
 				41ABE9E31E33BEF1000972B1 /* Main.storyboard */,
 				41ABE9E61E33BEF1000972B1 /* Assets.xcassets */,
 				41ABE9E81E33BEF1000972B1 /* LaunchScreen.storyboard */,
 				41ABE9EB1E33BEF1000972B1 /* Info.plist */,
+				41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */,
+				411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */,
 			);
 			path = EmployeeApp;
 			sourceTree = "<group>";
@@ -94,6 +100,14 @@
 				41ABE9F61E33BEF1000972B1 /* Info.plist */,
 			);
 			path = EmployeeAppTests;
+			sourceTree = "<group>";
+		};
+		41ABE9FF1E33C582000972B1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				41ABEA001E33C5B8000972B1 /* EmployeesViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +160,7 @@
 				TargetAttributes = {
 					41ABE9DB1E33BEF1000972B1 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = W45PLMNXUM;
 						ProvisioningStyle = Automatic;
 					};
 					41ABE9EF1E33BEF1000972B1 = {
@@ -199,7 +214,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ABE9E21E33BEF1000972B1 /* ViewController.swift in Sources */,
+				41ABEA011E33C5B8000972B1 /* EmployeesViewController.swift in Sources */,
+				41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */,
+				411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */,
 				41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W45PLMNXUM;
 				INFOPLIST_FILE = EmployeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.EmployeeApp;
@@ -349,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W45PLMNXUM;
 				INFOPLIST_FILE = EmployeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.EmployeeApp;
@@ -404,6 +423,7 @@
 				41ABE9FB1E33BEF1000972B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41ABE9FC1E33BEF1000972B1 /* Build configuration list for PBXNativeTarget "EmployeeAppTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +432,7 @@
 				41ABE9FE1E33BEF1000972B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
