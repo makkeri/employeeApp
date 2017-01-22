@@ -11,6 +11,8 @@ import XCTest
 
 class EmployeeAppTests: XCTestCase {
     
+    var expectation: XCTestExpectation?
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,15 +23,17 @@ class EmployeeAppTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testURLRequest() {
+        expectation = expectation(description: "get")
+        
+        let eManager = EmployeesManager()
+        eManager.doGetRequest(jsonUrl: "http://nielsmouthaan.nl/backbase/members.php", httpMethod: "GET")
+        
+        
+        waitForExpectations(timeout: 60) { (error) in
+            if error != nil {
+                print("test error: \(error?.localizedDescription)")
+            }
         }
     }
     

@@ -8,10 +8,17 @@
 
 import UIKit
 
-class EmplyeesViewController: UITableViewController {
+class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
 
+    let jsonURL = "http://nielsmouthaan.nl/backbase/members.php"
+    
+    var employeesArray: [EmployeeInfo?] = []
+    var eManager: EmployeesManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.eManager = EmployeesManager()
+        self.eManager?.doGetRequest(jsonUrl: <#T##String#>, httpMethod: "GET")
 
         // Do any additional setup after loading the view.
     }
@@ -36,6 +43,14 @@ class EmplyeesViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeCell", for: indexPath) as! EmployeeTableCell
         
         return cell;
+    }
+    
+    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?) {
+        if didComplete != true {
+            // Show alert.
+        } else {
+            self.employeesArray = data!
+        }
     }
 
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */; };
 		411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */; };
+		411305BC1E34CF9300ACFEDE /* EmployeesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */; };
+		411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */; };
 		41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */; };
 		41ABE9E51E33BEF1000972B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E31E33BEF1000972B1 /* Main.storyboard */; };
 		41ABE9E71E33BEF1000972B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E61E33BEF1000972B1 /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeTableCell.swift; sourceTree = "<group>"; };
+		411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeesManager.swift; sourceTree = "<group>"; };
+		411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeInfo.swift; sourceTree = "<group>"; };
 		41ABE9DC1E33BEF1000972B1 /* EmployeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41ABE9E41E33BEF1000972B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				41ABE9EB1E33BEF1000972B1 /* Info.plist */,
 				41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */,
 				411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */,
+				411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */,
+				411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */,
 			);
 			path = EmployeeApp;
 			sourceTree = "<group>";
@@ -214,8 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				411305BC1E34CF9300ACFEDE /* EmployeesManager.swift in Sources */,
 				41ABEA011E33C5B8000972B1 /* EmployeesViewController.swift in Sources */,
 				41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */,
+				411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */,
 				411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */,
 				41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */,
 			);
