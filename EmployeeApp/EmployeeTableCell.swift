@@ -11,6 +11,7 @@ import UIKit
 class EmployeeTableCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var surNameLabel: UILabel!
     @IBOutlet var profilePicture: UIImageView!
     
     override func awakeFromNib() {

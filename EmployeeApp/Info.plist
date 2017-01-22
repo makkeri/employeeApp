@@ -40,8 +40,10 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>domain.com</key>
+			<key>nielsmouthaan.nl</key>
 			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
