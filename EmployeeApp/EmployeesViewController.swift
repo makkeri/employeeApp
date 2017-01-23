@@ -8,22 +8,27 @@
 
 import UIKit
 
+enum AppErrors {
+    case NetworkError;
+    case ParsingError;
+    case NoErrors;
+}
+
 /* This class controls main UITableView and cells.
  */
 class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
 
     let jsonURL = "http://nielsmouthaan.nl/backbase/members.php"
-    
-    var employeesArray: [EmployeeInfo?] = []
+
     var sectionArray: [String?] = []
     var eManager: EmployeesManager?
     
-    struct sectionObjects {
+    struct sectionEmployees {
         var sectionName: String!
         var sectionObject: [EmployeeInfo?]
     }
     
-    var objectArray = [sectionObjects]()
+    var employeesArray = [sectionEmployees]()
     
     //MARK: - Override functions.
     
@@ -47,21 +52,18 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // return self.objectArray.count;
-        return 1;
+        return self.employeesArray.count;
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.employeesArray.count;
-        // return objectArray[section].sectionObject.count
+        return employeesArray[section].sectionObject.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeCell", for: indexPath) as! EmployeeTableCell
         
-        // let employee = objectArray[indexPath.section].sectionObject[indexPath.row] // employeesArray[indexPath.row]
-        let employee = employeesArray[indexPath.row]
+        let employee = employeesArray[indexPath.section].sectionObject[indexPath.row]
         
         // Set employee name.
         cell.nameLabel.text = employee?.getFullName()
@@ -79,67 +81,73 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         return cell;
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let row = indexPath.row
-//        print("Clicked Index: \(employeesArray[row]?.name)")
-        
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return employeesArray[section].sectionName
     }
-    
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return objectArray[section].sectionName
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ProfileView" {
             let destinationVC = segue.destination as! UINavigationController
             let targetVC = destinationVC.topViewController as! ProfileViewController
+            let section = self.tableView.indexPathForSelectedRow?.section
             let employeeIndex = self.tableView.indexPathForSelectedRow?.row
-            targetVC.employee = self.employeesArray[employeeIndex!]
+            
+            // Pass selected employee to ProfileView
+            targetVC.employee = employeesArray[section!].sectionObject[employeeIndex!]
         }
     }
     
     //MARK: - EmployeeManager delegate methods.
     
-    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, message: String) {
+    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors) {
         if didComplete != true {
-            // Show alert.
-        } else {
-            self.employeesArray = data!
-            self.tableView.reloadData()
             
-            guard (eManager?.sections.count)! > 0 else {
-                print("Cannot find sections.")
-                return
+            // Some error handling with UIAlerController.
+            let alert: UIAlertController?
+            var errorMsg: String = ""
+            
+            switch error {
+            case .NetworkError:
+                errorMsg = "Network error! \n Plase make sure you have network connection."
+                break
+                
+            case .ParsingError:
+                errorMsg = "Parsing error! \n Oops something went wrong when parsing content."
+                break
+                
+            default:
+                break
             }
-            self.sectionArray = (eManager?.sections)!
             
-            //self.setSections()
+            alert = UIAlertController(title: "Error", message: errorMsg,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+            
+            // Add refresh button
+            alert?.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (action) in
+                self.eManager?.doGetRequest(jsonUrl: self.jsonURL, httpMethod: "GET")
+            }))
+            
+            // Add cancel button
+            alert?.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            
+            self.present(alert!, animated: true, completion: nil)
+        } else {
+            self.setSections()
         }
     }
     
+    /* Create object array with sections and section objects(employees)
+     */
     private func setSections() {
         
-        // Collect employees by
-        var sectionsDictionary = Dictionary<String, [EmployeeInfo]>()
-        for section in self.sectionArray {
-            print("section: \(section)")
-            
-            var arr: [EmployeeInfo] = []
-            for emp in self.employeesArray {
-                
-                if emp?.organisation == section! {
-                    arr.append(emp!)
-                }
-            }
-            sectionsDictionary[section!] = arr
-        }
+        let sectionsDictionary = eManager?.sectionsDictionary
         
-        print("Sections: \(sectionsDictionary)")
-        
-        for (key, value) in sectionsDictionary {
+        for (key, value) in sectionsDictionary! {
             print("\(key) -> \(value)")
-            objectArray.append(sectionObjects(sectionName: key, sectionObject: value))
+            self.employeesArray.append(sectionEmployees(sectionName: key, sectionObject: value))
         }
+        
+        self.tableView.reloadData()
     }
 
 }

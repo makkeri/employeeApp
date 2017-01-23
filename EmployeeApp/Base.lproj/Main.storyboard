@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,17 +25,9 @@
             </objects>
             <point key="canvasLocation" x="-918" y="-39"/>
         </scene>
-        <!--Emplyees View Controller-->
+        <!--Employees-->
         <scene sceneID="rzh-SH-glv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JOm-ZD-Oqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationBar contentMode="scaleToFill" id="6JW-MK-Ykf">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <navigationItem title="Title" id="RNn-AB-Oha"/>
-                    </items>
-                </navigationBar>
                 <tableViewController id="8Ly-sY-FtC" customClass="EmplyeesViewController" customModule="EmployeeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OJf-bX-GGi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -47,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A57-SK-GXT" id="7MV-Ak-QVp">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acD-r5-f4B">
@@ -87,12 +78,20 @@
                             <outlet property="delegate" destination="8Ly-sY-FtC" id="kXy-4f-0br"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kzA-Ir-9bb"/>
+                    <navigationItem key="navigationItem" title="Employees" id="kzA-Ir-9bb"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JOm-ZD-Oqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationBar contentMode="scaleToFill" id="6JW-MK-Ykf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <navigationItem title="Title" id="RNn-AB-Oha"/>
+                    </items>
+                </navigationBar>
             </objects>
             <point key="canvasLocation" x="-26.399999999999999" y="-39.130434782608695"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="Onr-y2-smb">
             <objects>
                 <viewController id="Ier-N8-wV6" customClass="ProfileViewController" customModule="EmployeeApp" sceneMemberID="viewController">
@@ -130,7 +129,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7Yt-4p-a6T"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -141,6 +140,20 @@
                                     <action selector="sendMail" destination="Ier-N8-wV6" eventType="touchUpInside" id="meC-YN-mW2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbu-6a-2zN">
+                                <rect key="frame" x="20" y="375" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DEPARTMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6E-9F-4GV">
+                                <rect key="frame" x="20" y="423" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -164,7 +177,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="0Gl-H8-3S8" secondAttribute="trailing" constant="64" id="uzf-0h-4jO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sRT-UM-bcs">
+                    <navigationItem key="navigationItem" title="Profile" id="sRT-UM-bcs">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="Bs5-JR-eRo">
                             <connections>
                                 <action selector="goBack" destination="Ier-N8-wV6" id="Zf5-Lr-LZE"/>
@@ -185,7 +198,6 @@
         <!--Navigation Controller-->
         <scene sceneID="yWN-Fh-p7b">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GIJ-bU-Q5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qHs-OZ-SQq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fGF-tE-lvx">
@@ -197,6 +209,7 @@
                         <segue destination="Ier-N8-wV6" kind="relationship" relationship="rootViewController" id="8ZD-Nm-jV2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GIJ-bU-Q5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="866.39999999999998" y="-43.628185907046479"/>
         </scene>

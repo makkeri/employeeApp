@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SystemConfiguration
 import Foundation
 
 /* Delegate function to notify Main view for UI updated. And error messaging.
  */
 protocol EmployeesDataDelegate {
-    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, message: String)
+    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors)
 }
 
 /* This class request employees from given URL and parses data to EmployeeInfo objects.
@@ -29,12 +30,14 @@ class EmployeesManager: NSObject {
     // URL session variables.
     let session: URLSession = URLSession.shared
     var sessionDataTask: URLSessionDataTask?
+    
+    var sectionsDictionary = Dictionary<String, [EmployeeInfo]>()
     var sections: [String?] = []
     
     // List of all employees.
     var employeesInfoArray: [EmployeeInfo] = []
     
-    struct sectionObjects {
+    public struct sectionObjects {
         var sectionName: String!
         var sectionObject: [EmployeeInfo?]
     }
@@ -48,6 +51,11 @@ class EmployeesManager: NSObject {
      * @param httpMethod, request method (GET, POST, PUT, etc.)
      */
     public func doGetRequest(jsonUrl: String, httpMethod: String) {
+        
+        if self.checkInternetConnection() == false {
+            self.delegate?.employeesDataReceived(didComplete: false, data: nil, error: AppErrors.NetworkError)
+            return
+        }
         
         // Check if sessionDataTask is already initialized. If so, cancel it before reuse.
         if sessionDataTask != nil {
@@ -65,8 +73,8 @@ class EmployeesManager: NSObject {
         self.sessionDataTask = self.session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
                 // If some errors, send false and nil to delegate.
-                let errorMsg = "error: \(error?.localizedDescription)"
-                self.delegate?.employeesDataReceived(didComplete: false, data: nil, message: errorMsg)
+                print("error: \(error?.localizedDescription)")
+                self.delegate?.employeesDataReceived(didComplete: false, data: nil, error: AppErrors.NetworkError)
             } else {
                 self.parseJSON(jsonData: data!)
             }
@@ -77,6 +85,33 @@ class EmployeesManager: NSObject {
 
     //MARK: - Private functions
     
+    /* Check if network is available.
+     */
+    private func checkInternetConnection() -> Bool {
+        
+        var address = sockaddr_in()
+        address.sin_len = UInt8(MemoryLayout.size(ofValue: address))
+        address.sin_family = sa_family_t(AF_INET)
+        
+        guard let defaultRouteReachability = withUnsafePointer(to: &address, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+        
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        
+        return (isReachable && !needsConnection);
+    }
+    
     /* Parse JSON from received data to dictionary.
      */
     private func parseJSON(jsonData: Data) {
@@ -85,6 +120,7 @@ class EmployeesManager: NSObject {
             // Serialize json
             let parsedJson = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions()) as! NSDictionary
             
+            // Save Sections.
             self.sections = parsedJson.allKeys as! [String]
             
             // Parse JSON and do employeeInfo objects.
@@ -94,16 +130,6 @@ class EmployeesManager: NSObject {
                 }
             }
             
-            
-//            let dlGroup = DispatchGroup()
-//            
-//            for employee in self.employeesInfoArray {
-//                
-//                dlGroup.enter()
-//                
-//                self.downloadImage(emp: employee)
-//            }
-            
             // Download profile pictures when parsing is done.
             self.downloadImage(emp: self.employeesInfoArray)
             
@@ -112,7 +138,7 @@ class EmployeesManager: NSObject {
         } catch let error as Error? {
             let errorMSG = "Error when serializing JSON: \(error?.localizedDescription)"
             print("\(errorMSG)")
-            self.delegate?.employeesDataReceived(didComplete: false, data: nil, message: errorMSG)
+            self.delegate?.employeesDataReceived(didComplete: false, data: nil, error: AppErrors.ParsingError)
         }
     }
     
@@ -138,7 +164,12 @@ class EmployeesManager: NSObject {
      */
     private func downloadImage(emp: [EmployeeInfo?]) {
 
+        let dlGroup = DispatchGroup()
+        
         for employee in emp {
+            
+            dlGroup.enter()
+            
             if employee?.photoUrl != nil {
                 let baseUrl = "http://nielsmouthaan.nl/backbase/photos/"
                 let photoUrl: String? = baseUrl + (employee?.photoUrl!)!
@@ -146,26 +177,26 @@ class EmployeesManager: NSObject {
                     print("\(imageUrl)")
                     
                     // Get image in own thread.
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        if let imageData: NSData = NSData(contentsOf: imageUrl) {
-                            employee?.imageData = imageData as Data
-                        }
-                        
-                        // When image recieved update UI.
-                        self.updateTableView()
+                    if let imageData: NSData = NSData(contentsOf: imageUrl) {
+                        employee?.imageData = imageData as Data
                     }
+                    
+                    dlGroup.leave()
                 }
             }
         }
+        
+        DispatchGroup().notify(queue: DispatchQueue.main) {
+            self.setSections()
+            self.updateTableView()
+        }
     }
     
+    /* Divide employees by the department(section)
+     */
     private func setSections() {
         
-        // Collect employees by
-        var sectionsDictionary = Dictionary<String, [EmployeeInfo]>()
         for section in self.sections {
-            print("section: \(section)")
-            
             var arr: [EmployeeInfo] = []
             for emp in self.employeesInfoArray {
                 
@@ -173,21 +204,14 @@ class EmployeesManager: NSObject {
                     arr.append(emp)
                 }
             }
-            sectionsDictionary[section!] = arr
-        }
-        
-        print("Sections: \(sectionsDictionary)")
-        
-        for (key, value) in sectionsDictionary {
-            print("\(key) -> \(value)")
-            objectArray.append(sectionObjects(sectionName: key, sectionObject: value))
+            self.sectionsDictionary[section!] = arr
         }
     }
     
     // Call delegate to update UI.
     private func updateTableView() {
         DispatchQueue.main.async {
-            self.delegate?.employeesDataReceived(didComplete: true, data: self.employeesInfoArray, message: "Update.")
+            self.delegate?.employeesDataReceived(didComplete: true, data: self.employeesInfoArray, error: AppErrors.NoErrors)
         }
     }
 }
