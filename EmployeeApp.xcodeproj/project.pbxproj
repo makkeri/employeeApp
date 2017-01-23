@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */; };
 		411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */; };
 		411305BC1E34CF9300ACFEDE /* EmployeesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */; };
 		411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */; };
@@ -31,7 +30,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeTableCell.swift; sourceTree = "<group>"; };
 		411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeesManager.swift; sourceTree = "<group>"; };
 		411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeInfo.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 				41ABE9E61E33BEF1000972B1 /* Assets.xcassets */,
 				41ABE9E81E33BEF1000972B1 /* LaunchScreen.storyboard */,
 				41ABE9EB1E33BEF1000972B1 /* Info.plist */,
-				41094CB91E33CC3800FBB9C9 /* NetworkRequests.swift */,
 				411305B91E34CCB700ACFEDE /* EmployeeTableCell.swift */,
 				411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */,
 				411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */,
@@ -225,7 +222,6 @@
 			files = (
 				411305BC1E34CF9300ACFEDE /* EmployeesManager.swift in Sources */,
 				41ABEA011E33C5B8000972B1 /* EmployeesViewController.swift in Sources */,
-				41094CBA1E33CC3800FBB9C9 /* NetworkRequests.swift in Sources */,
 				411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */,
 				411305C01E353C3000ACFEDE /* ProfileViewController.swift in Sources */,
 				411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */,
@@ -368,6 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W45PLMNXUM;
 				INFOPLIST_FILE = EmployeeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.EmployeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,6 +378,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W45PLMNXUM;
 				INFOPLIST_FILE = EmployeeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.EmployeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

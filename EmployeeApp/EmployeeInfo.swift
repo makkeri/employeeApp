@@ -10,6 +10,7 @@ import UIKit
 
 class EmployeeInfo: NSObject {
     
+    // Employee info variables.
     public var name: String? = ""
     public var surname: String? = ""
     public var email: String? = ""
@@ -19,10 +20,14 @@ class EmployeeInfo: NSObject {
     public var imageData: Data? = nil
     public var image: UIImage?
     
+    /* Class init function.
+     */
     override init() {
         
     }
 
+    /* Return full name on employee. name + surname
+     */
     public func getFullName() -> String {
         return self.name! + " " + self.surname!
     }

@@ -8,21 +8,20 @@
 
 import UIKit
 
+/* Custom class for cells in tableView.
+ */
 class EmployeeTableCell: UITableViewCell {
 
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var surNameLabel: UILabel!
     @IBOutlet var profilePicture: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }
