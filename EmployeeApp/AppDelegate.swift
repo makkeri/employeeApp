@@ -17,12 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        let mainSB: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let initVC: UIViewController = mainSB.instantiateViewController(withIdentifier: "SplashScreen")
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = initVC
-//        self.window?.makeKeyAndVisible()
-        
         return true
     }
 

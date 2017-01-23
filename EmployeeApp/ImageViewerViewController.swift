@@ -16,8 +16,6 @@ class ImageViewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // self.setBackgroundImage()
-        
         self.view.backgroundColor = UIColor.black
         
         self.setImage(image: UIImage(data: self.imageData!)!)
@@ -36,16 +34,6 @@ class ImageViewerViewController: UIViewController {
             self.profileImageView.image = image
             self.profileImageView.contentMode = .scaleAspectFit
         }
-    }
-    
-    private func setBackgroundImage() {
-        let image = UIImage(named: "gradient3_bg")
-        
-        let imageView = UIImageView(frame: self.view.bounds)
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = image
-        
-        self.view.insertSubview(imageView, belowSubview: self.profileImageView)
     }
     
     /* Close view.

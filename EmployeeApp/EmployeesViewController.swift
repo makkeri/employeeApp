@@ -25,6 +25,7 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     
     var splashVC: UIViewController?
     
+    // Struct for Categorizing employees
     struct sectionEmployees {
         var sectionName: String!
         var sectionObject: [EmployeeInfo?]
@@ -146,6 +147,14 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         }
     }
     
+    /* Call when want to close splashScreen
+     */
+    func closeSplashScreen() {
+        self.splashVC?.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - Private functions
+    
     /* Create object array with sections and section objects(employees)
      */
     private func setSections() {
@@ -157,10 +166,6 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         }
         
         self.tableView.reloadData()
-    }
-    
-    func closeSplashScreen() {
-        self.splashVC?.dismiss(animated: true, completion: nil)
     }
 
 }

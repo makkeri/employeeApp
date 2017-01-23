@@ -8,10 +8,11 @@
 
 import UIKit
 
-/* 
+/* Profile View Controller. Populates View with employees data.
  */
 class ProfileViewController: UIViewController {
     
+    // Class variables
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var roleLabel: UILabel!
@@ -48,11 +49,7 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    /* Back button navigation.
-     */
-    @IBAction func goBack() {
-        self.dismiss(animated: true, completion: nil)
-    }
+    //MARK: - Private functions
     
     /* Set profile picture as background image, if profile picture is missing add default BG image instead.
      */
@@ -105,6 +102,8 @@ class ProfileViewController: UIViewController {
         self.departmentLabel.text = self.employee?.organisation
     }
     
+    //MARK: - Actions
+    
     /* Action for button to open default email application with email already to added.
      */
     func sendMail(gesture: UITapGestureRecognizer) {
@@ -134,6 +133,12 @@ class ProfileViewController: UIViewController {
         } else {
             print("No image to show.")
         }
+    }
+    
+    /* Back button navigation.
+     */
+    @IBAction func goBack() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

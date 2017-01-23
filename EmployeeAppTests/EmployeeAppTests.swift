@@ -9,15 +9,15 @@
 import XCTest
 @testable import EmployeeApp
 
-class EmployeeAppTests: XCTestCase, EmployeesDataDelegate {
+class EmployeeAppTests: XCTestCase {
     
     var expectation: XCTestExpectation?
     var eManager: EmployeesManager?
+    var sessionDataTask: URLSessionDataTask?
     
     override func setUp() {
         super.setUp()
         self.eManager = EmployeesManager()
-        self.eManager?.delegate = self;
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -30,9 +30,23 @@ class EmployeeAppTests: XCTestCase, EmployeesDataDelegate {
     func testURLRequest() {
         expectation = expectation(description: "get")
         
-        let eManager = EmployeesManager()
-        eManager.doGetRequest(jsonUrl: "http://nielsmouthaan.nl/backbase/members.php", httpMethod: "GET")
+        var request = URLRequest.init(url: URL(string: "http://nielsmouthaan.nl/backbase/members.php")!)
+        request.httpMethod = "GET"
+        request.timeoutInterval = 30
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
+        // Get data from request url.
+        self.sessionDataTask = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            if error != nil {
+                // If some errors, send false and nil to delegate.
+                print("error: \(error?.localizedDescription)")
+            } else {
+                self.expectation?.fulfill()
+            }
+        })
+        
+        self.sessionDataTask?.resume()
         
         waitForExpectations(timeout: 60) { (error) in
             if error != nil {
@@ -40,11 +54,4 @@ class EmployeeAppTests: XCTestCase, EmployeesDataDelegate {
             }
         }
     }
-    
-    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors) {
-        if error == AppErrors.NoErrors {
-            expectation?.fulfill()
-        }
-    }
-    
 }

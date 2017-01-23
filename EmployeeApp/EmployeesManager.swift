@@ -74,7 +74,6 @@ class EmployeesManager: NSObject {
         self.sessionDataTask = self.session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
                 // If some errors, send false and nil to delegate.
-                print("error: \(error?.localizedDescription)")
                 self.delegate?.employeesDataReceived(didComplete: false, data: nil, error: AppErrors.NetworkError)
             } else {
                 self.parseJSON(jsonData: data!)
@@ -180,6 +179,7 @@ class EmployeesManager: NSObject {
             if employee?.photoUrl != nil {
                 let baseUrl = "http://nielsmouthaan.nl/backbase/photos/"
                 let photoUrl: String? = baseUrl + (employee?.photoUrl!)!
+                
                 if let imageUrl: URL = URL(string: photoUrl!) {
                     
                     // Get image in own thread.
@@ -202,8 +202,10 @@ class EmployeesManager: NSObject {
     /* Divide employees by the department(section)
      */
     private func setSections() {
+        
         for section in self.sections {
             var arr: [EmployeeInfo] = []
+            
             for emp in self.employeesInfoArray {
                 
                 if emp.organisation == section! {
@@ -217,7 +219,6 @@ class EmployeesManager: NSObject {
     // Call delegate to update UI.
     private func updateTableView() {
         DispatchQueue.main.async {
-            print("UPDATE CALLED")
             self.delegate?.employeesDataReceived(didComplete: true, data: self.employeesInfoArray, error: AppErrors.NoErrors)
         }
     }
