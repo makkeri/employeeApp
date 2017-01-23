@@ -11,6 +11,8 @@
 		411305BC1E34CF9300ACFEDE /* EmployeesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */; };
 		411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */; };
 		411305C01E353C3000ACFEDE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411305BF1E353C3000ACFEDE /* ProfileViewController.swift */; };
+		415374611E36782600773158 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415374601E36782600773158 /* SplashViewController.swift */; };
+		415374631E36857800773158 /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415374621E36857800773158 /* ImageViewerViewController.swift */; };
 		41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */; };
 		41ABE9E51E33BEF1000972B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E31E33BEF1000972B1 /* Main.storyboard */; };
 		41ABE9E71E33BEF1000972B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41ABE9E61E33BEF1000972B1 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		411305BB1E34CF9300ACFEDE /* EmployeesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeesManager.swift; sourceTree = "<group>"; };
 		411305BD1E34CFC500ACFEDE /* EmployeeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeInfo.swift; sourceTree = "<group>"; };
 		411305BF1E353C3000ACFEDE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		415374601E36782600773158 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		415374621E36857800773158 /* ImageViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
 		41ABE9DC1E33BEF1000972B1 /* EmployeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41ABE9DF1E33BEF1000972B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41ABE9E41E33BEF1000972B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 		41ABE9FF1E33C582000972B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				415374621E36857800773158 /* ImageViewerViewController.swift */,
+				415374601E36782600773158 /* SplashViewController.swift */,
 				41ABEA001E33C5B8000972B1 /* EmployeesViewController.swift */,
 				411305BF1E353C3000ACFEDE /* ProfileViewController.swift */,
 			);
@@ -225,6 +231,8 @@
 				411305BE1E34CFC500ACFEDE /* EmployeeInfo.swift in Sources */,
 				411305C01E353C3000ACFEDE /* ProfileViewController.swift in Sources */,
 				411305BA1E34CCB700ACFEDE /* EmployeeTableCell.swift in Sources */,
+				415374611E36782600773158 /* SplashViewController.swift in Sources */,
+				415374631E36857800773158 /* ImageViewerViewController.swift in Sources */,
 				41ABE9E01E33BEF1000972B1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

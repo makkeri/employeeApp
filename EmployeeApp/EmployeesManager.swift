@@ -52,6 +52,7 @@ class EmployeesManager: NSObject {
      */
     public func doGetRequest(jsonUrl: String, httpMethod: String) {
         
+        // Check internet connection.
         if self.checkInternetConnection() == false {
             self.delegate?.employeesDataReceived(didComplete: false, data: nil, error: AppErrors.NetworkError)
             return
@@ -124,9 +125,13 @@ class EmployeesManager: NSObject {
             self.sections = parsedJson.allKeys as! [String]
             
             // Parse JSON and do employeeInfo objects.
-            for key in parsedJson.allKeys {
-                if let array = parsedJson[key] {
-                    self.createEmployeeInfo(key: key as! String, array: array as! Array<Dictionary<String, Any>>)
+            if self.sections.count == 0 {
+                self.createEmployeeInfo(key: "", array: [parsedJson as! Dictionary<String, Any>])
+            } else {
+                for key in parsedJson.allKeys {
+                    if let array = parsedJson[key] {
+                        self.createEmployeeInfo(key: key as! String, array: array as! Array<Dictionary<String, Any>>)
+                    }
                 }
             }
             
@@ -164,17 +169,18 @@ class EmployeesManager: NSObject {
      */
     private func downloadImage(emp: [EmployeeInfo?]) {
 
+        // Create DispatchGroup to download images.
         let dlGroup = DispatchGroup()
         
         for employee in emp {
             
+            // Enter group to download image in bacground thread.
             dlGroup.enter()
             
             if employee?.photoUrl != nil {
                 let baseUrl = "http://nielsmouthaan.nl/backbase/photos/"
                 let photoUrl: String? = baseUrl + (employee?.photoUrl!)!
                 if let imageUrl: URL = URL(string: photoUrl!) {
-                    print("\(imageUrl)")
                     
                     // Get image in own thread.
                     if let imageData: NSData = NSData(contentsOf: imageUrl) {
@@ -186,6 +192,7 @@ class EmployeesManager: NSObject {
             }
         }
         
+        // Wait all that all group thread are ended and continue.
         DispatchGroup().notify(queue: DispatchQueue.main) {
             self.setSections()
             self.updateTableView()
@@ -195,7 +202,6 @@ class EmployeesManager: NSObject {
     /* Divide employees by the department(section)
      */
     private func setSections() {
-        
         for section in self.sections {
             var arr: [EmployeeInfo] = []
             for emp in self.employeesInfoArray {
@@ -211,6 +217,7 @@ class EmployeesManager: NSObject {
     // Call delegate to update UI.
     private func updateTableView() {
         DispatchQueue.main.async {
+            print("UPDATE CALLED")
             self.delegate?.employeesDataReceived(didComplete: true, data: self.employeesInfoArray, error: AppErrors.NoErrors)
         }
     }

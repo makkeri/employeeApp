@@ -9,12 +9,15 @@
 import XCTest
 @testable import EmployeeApp
 
-class EmployeeAppTests: XCTestCase {
+class EmployeeAppTests: XCTestCase, EmployeesDataDelegate {
     
     var expectation: XCTestExpectation?
+    var eManager: EmployeesManager?
     
     override func setUp() {
         super.setUp()
+        self.eManager = EmployeesManager()
+        self.eManager?.delegate = self;
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -23,6 +26,7 @@ class EmployeeAppTests: XCTestCase {
         super.tearDown()
     }
     
+    // Unit test for gettin data.
     func testURLRequest() {
         expectation = expectation(description: "get")
         
@@ -34,6 +38,12 @@ class EmployeeAppTests: XCTestCase {
             if error != nil {
                 print("test error: \(error?.localizedDescription)")
             }
+        }
+    }
+    
+    func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors) {
+        if error == AppErrors.NoErrors {
+            expectation?.fulfill()
         }
     }
     

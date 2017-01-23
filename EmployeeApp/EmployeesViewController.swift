@@ -23,6 +23,8 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     var sectionArray: [String?] = []
     var eManager: EmployeesManager?
     
+    var splashVC: UIViewController?
+    
     struct sectionEmployees {
         var sectionName: String!
         var sectionObject: [EmployeeInfo?]
@@ -35,6 +37,10 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Longer splashScreen ;)
+        let mainSB: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        self.splashVC = mainSB.instantiateViewController(withIdentifier: "SplashScreen")
+        self.present(self.splashVC!, animated: false, completion: nil)
         
         // Autolayout for cells.
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -133,6 +139,10 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
             self.present(alert!, animated: true, completion: nil)
         } else {
             self.setSections()
+            
+            // Delay SplashScreen 2 seconds.
+            perform(#selector(closeSplashScreen), with: self, afterDelay: 2.0)
+            
         }
     }
     
@@ -143,11 +153,14 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         let sectionsDictionary = eManager?.sectionsDictionary
         
         for (key, value) in sectionsDictionary! {
-            print("\(key) -> \(value)")
             self.employeesArray.append(sectionEmployees(sectionName: key, sectionObject: value))
         }
         
         self.tableView.reloadData()
+    }
+    
+    func closeSplashScreen() {
+        self.splashVC?.dismiss(animated: true, completion: nil)
     }
 
 }
