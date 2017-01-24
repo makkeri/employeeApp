@@ -49,6 +49,10 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    deinit {
+        self.employee = nil;
+    }
+    
     //MARK: - Private functions
     
     /* Set profile picture as background image, if profile picture is missing add default BG image instead.

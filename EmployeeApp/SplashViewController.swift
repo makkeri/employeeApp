@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
 
     @IBOutlet var appIcon: UIImageView!
     @IBOutlet var label: UILabel?
-    var eManager: EmployeesManager?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

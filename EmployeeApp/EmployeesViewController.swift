@@ -52,11 +52,6 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         self.eManager?.delegate = self
         self.eManager?.doGetRequest(jsonUrl: jsonURL, httpMethod: "GET")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.employeesArray.count;
@@ -151,6 +146,7 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
      */
     func closeSplashScreen() {
         self.splashVC?.dismiss(animated: true, completion: nil)
+        self.splashVC = nil;
     }
     
     //MARK: - Private functions
