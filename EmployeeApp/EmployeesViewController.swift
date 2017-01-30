@@ -24,7 +24,10 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     var sectionArray: [String?] = []
     var eManager: EmployeesManager?
     
+    // SplashScreen UIViewController
     var splashVC: UIViewController?
+    // Flag for knowing if we need to show splashScreen or not.
+    var showSplashScreen: Bool?
     
     // Struct for Categorizing employees
     struct sectionEmployees {
@@ -39,12 +42,9 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Longer splashScreen
-        
-        let mainSB: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        self.splashVC = mainSB.instantiateViewController(withIdentifier: "SplashScreen")
-        self.present(self.splashVC!, animated: false, completion: nil)
- 
+        // Set True when app started.
+        self.showSplashScreen = true
+
         // Autolayout for cells.
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 80
@@ -53,6 +53,17 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         self.eManager = EmployeesManager()
         self.eManager?.delegate = self
         self.eManager?.doGetRequest(jsonUrl: jsonURL, httpMethod: "GET")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // Show splashscreen.
+        if showSplashScreen == true {
+            let mainSB: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            self.splashVC = mainSB.instantiateViewController(withIdentifier: "SplashScreen")
+            self.present(self.splashVC!, animated: false, completion: nil)
+        }
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,8 +116,9 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     
     func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors) {
         
-        // Close splash screen with 2 second delay.
-        perform(#selector(closeSplashScreen), with: self, afterDelay: 2.0)
+        // Set splashSCreen flag to false and Close splash screen
+        self.showSplashScreen = false;
+        perform(#selector(closeSplashScreen), with: self, afterDelay: 1.0)
         
         if didComplete != true {
             
@@ -139,6 +151,8 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         self.tableView.reloadData()
     }
     
+    /* Show UIAlert with specific error
+     */
     private func showUIAlert(error: AppErrors) {
         let alert: UIAlertController?
         var errorMsg: String = ""
