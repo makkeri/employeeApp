@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Error cases.
 enum AppErrors {
     case NetworkError;
     case ParsingError;
@@ -38,11 +39,12 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Longer splashScreen ;)
+        // Longer splashScreen
+        
         let mainSB: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.splashVC = mainSB.instantiateViewController(withIdentifier: "SplashScreen")
         self.present(self.splashVC!, animated: false, completion: nil)
-        
+ 
         // Autolayout for cells.
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 80
@@ -102,43 +104,16 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
     //MARK: - EmployeeManager delegate methods.
     
     func employeesDataReceived(didComplete: Bool, data: [EmployeeInfo]?, error: AppErrors) {
+        
+        // Close splash screen with 2 second delay.
+        perform(#selector(closeSplashScreen), with: self, afterDelay: 2.0)
+        
         if didComplete != true {
             
-            // Some error handling with UIAlerController.
-            let alert: UIAlertController?
-            var errorMsg: String = ""
+            self.showUIAlert(error: error)
             
-            switch error {
-            case .NetworkError:
-                errorMsg = "Network error! \n Plase make sure you have network connection."
-                break
-                
-            case .ParsingError:
-                errorMsg = "Parsing error! \n Oops something went wrong when parsing content."
-                break
-                
-            default:
-                break
-            }
-            
-            alert = UIAlertController(title: "Error", message: errorMsg,
-                                      preferredStyle: UIAlertControllerStyle.alert)
-            
-            // Add refresh button
-            alert?.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (action) in
-                self.eManager?.doGetRequest(jsonUrl: self.jsonURL, httpMethod: "GET")
-            }))
-            
-            // Add cancel button
-            alert?.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-            
-            self.present(alert!, animated: true, completion: nil)
         } else {
             self.setSections()
-            
-            // Delay SplashScreen 2 seconds.
-            perform(#selector(closeSplashScreen), with: self, afterDelay: 2.0)
-            
         }
     }
     
@@ -163,5 +138,35 @@ class EmplyeesViewController: UITableViewController, EmployeesDataDelegate {
         
         self.tableView.reloadData()
     }
-
+    
+    private func showUIAlert(error: AppErrors) {
+        let alert: UIAlertController?
+        var errorMsg: String = ""
+        
+        switch error {
+        case .NetworkError:
+            errorMsg = "Network error! \n Plase make sure you have network connection."
+            break
+            
+        case .ParsingError:
+            errorMsg = "Parsing error! \n Oops something went wrong when parsing content."
+            break
+            
+        default:
+            break
+        }
+        
+        alert = UIAlertController(title: "Error", message: errorMsg,
+                                  preferredStyle: UIAlertControllerStyle.alert)
+        
+        // Add refresh button
+        alert?.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (action) in
+            self.eManager?.doGetRequest(jsonUrl: self.jsonURL, httpMethod: "GET")
+        }))
+        
+        // Add cancel button
+        alert?.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        self.present(alert!, animated: true, completion: nil)
+    }
 }

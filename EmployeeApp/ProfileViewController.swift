@@ -24,9 +24,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Taps gestures.
+        // Gestures.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(gesture:)))
         let tapGestureMailMe = UITapGestureRecognizer(target: self, action: #selector(sendMail(gesture:)))
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
+        swipeGesture.direction = .down
+        self.view.addGestureRecognizer(swipeGesture)
         
         self.mailMeImage.addGestureRecognizer(tapGestureMailMe)
         self.mailMeImage.isUserInteractionEnabled = true
